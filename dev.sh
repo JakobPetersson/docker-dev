@@ -48,7 +48,7 @@ for arg in "$@"; do
   elif [ "$arg" == "logs" ]; then
     logs
   else
-    echo "Unknown command: $1"
+    echo "Unknown command: $arg"
     exit 1
   fi
 done
