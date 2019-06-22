@@ -34,24 +34,21 @@ function logs() {
   docker-compose -f "$COMPOSE_PATH" logs -f
 }
 
-if [ "$1" == "build" ]; then
-  build
-  exit 0
-elif [ "$1" == "start" ]; then
-  start
-  exit 0
-elif [ "$1" == "stop" ]; then
-  stop
-  exit 0
-elif [ "$1" == "reset" ]; then
-  reset
-  exit 0
-elif [ "$1" == "remove" ]; then
-  remove
-  exit 0
-elif [ "$1" == "logs" ]; then
-  logs
-  exit 0
-fi
-
-echo "Unknown command: $1"
+for arg in "$@"; do
+  if [ "$arg" == "build" ]; then
+    build
+  elif [ "$arg" == "start" ]; then
+    start
+  elif [ "$arg" == "stop" ]; then
+    stop
+  elif [ "$arg" == "reset" ]; then
+    reset
+  elif [ "$arg" == "remove" ]; then
+    remove
+  elif [ "$arg" == "logs" ]; then
+    logs
+  else
+    echo "Unknown command: $1"
+    exit 1
+  fi
+done
