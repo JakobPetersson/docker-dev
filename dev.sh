@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 COMPOSE_PATH="$( cd "$(dirname "$0")" ; pwd -P )/docker-compose.yml"
 
 function build() {
