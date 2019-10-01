@@ -4,34 +4,34 @@ set -e
 
 COMPOSE_PATH="$( cd "$(dirname "$0")" ; pwd -P )/docker-compose.yml"
 
-function build() {
+build() {
   echo "Building"
   docker-compose -f "$COMPOSE_PATH" build
 }
 
-function start() {
+start() {
   echo "Starting"
   docker-compose -f "$COMPOSE_PATH" up -d --remove-orphans
 }
 
-function stop() {
+stop() {
   echo "Stopping"
   docker-compose -f "$COMPOSE_PATH" stop
 }
 
-function remove() {
+remove() {
   stop
   echo "Removing"
   docker-compose -f "$COMPOSE_PATH" rm -f
 }
 
-function reset() {
+reset() {
   build
   remove
   start
 }
 
-function logs() {
+logs() {
   echo "Logs"
   docker-compose -f "$COMPOSE_PATH" logs -f
 }
