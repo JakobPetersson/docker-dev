@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -eou
+set -eou > /dev/null
 
 COMPOSE_PATH="$( cd "$(dirname "$0")" ; pwd -P )/docker-compose.yml"
 
@@ -36,21 +36,23 @@ logs() {
   docker-compose -f "$COMPOSE_PATH" logs -f
 }
 
-for arg in "$@"; do
-  if [ "$arg" == "build" ]; then
-    build
-  elif [ "$arg" == "start" ]; then
-    start
-  elif [ "$arg" == "stop" ]; then
-    stop
-  elif [ "$arg" == "reset" ]; then
-    reset
-  elif [ "$arg" == "remove" ]; then
-    remove
-  elif [ "$arg" == "logs" ]; then
-    logs
-  else
-    echo "Unknown command: $arg"
-    exit 1
-  fi
+for ARG in "$@"; do
+  case "${ARG}" in
+    build)
+      build;;
+    start)
+      start;;
+    stop)
+      stop;;
+    reset)
+      reset;;
+    remove)
+      remove;;
+    logs)
+      logs;;
+    *)
+      echo "Unknown command: ${ARG}"
+      exit 1
+      ;;
+  esac
 done
