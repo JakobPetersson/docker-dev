@@ -5,7 +5,7 @@ set -eou > /dev/null
 COMPOSE_PATH="$( cd "$(dirname "$0")" ; pwd -P )/docker-compose.yml"
 
 pull() {
-  echo "Building"
+  echo "Pulling"
   docker-compose -f "$COMPOSE_PATH" pull
 }
 
