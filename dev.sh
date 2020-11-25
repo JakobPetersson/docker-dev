@@ -4,6 +4,11 @@ set -eou > /dev/null
 
 COMPOSE_PATH="$( cd "$(dirname "$0")" ; pwd -P )/docker-compose.yml"
 
+pull() {
+  echo "Building"
+  docker-compose -f "$COMPOSE_PATH" pull
+}
+
 build() {
   echo "Building"
   docker-compose -f "$COMPOSE_PATH" build
@@ -26,6 +31,7 @@ remove() {
 }
 
 reset() {
+  pull
   build
   remove
   start
@@ -38,6 +44,8 @@ logs() {
 
 for ARG in "$@"; do
   case "${ARG}" in
+    pull)
+      pull;;
     build)
       build;;
     start)
